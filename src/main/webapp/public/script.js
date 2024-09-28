@@ -1,4 +1,4 @@
-// Listen to form submission event
+// Listen to form submission event for creating users
 document.getElementById('userForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent page reload on form submission
     
@@ -33,7 +33,7 @@ document.getElementById('userForm').addEventListener('submit', function(event) {
     });
 });
 
-// Define the function to fetch the user list
+// Fetch the list of users
 function fetchUsers() {
     const userList = document.getElementById('userList');
     userList.innerHTML = ''; // Clear the previous list
@@ -61,3 +61,33 @@ function fetchUsers() {
 
 // Automatically fetch and display the user list when the page loads
 document.addEventListener('DOMContentLoaded', fetchUsers);
+
+// Listen to form submission event for weather information
+document.getElementById('weatherForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent page reload on form submission
+    
+    // Get the city input
+    const city = document.getElementById('city').value;
+
+    // Fetch weather information
+    fetch(`http://api.weatherstack.com/current?access_key=YOUR_ACCESS_KEY&query=${city}`, {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            document.getElementById('weatherResult').innerText = 'Error: ' + data.error.info;
+        } else {
+            const weatherInfo = `
+                City: ${data.location.name}, ${data.location.country}\n
+                Temperature: ${data.current.temperature}°C\n
+                Weather Description: ${data.current.weather_descriptions.join(', ')}\n
+                Wind Speed: ${data.current.wind_speed} km/h
+            `;
+            document.getElementById('weatherResult').innerText = weatherInfo;
+        }
+    })
+    .catch(error => {
+        document.getElementById('weatherResult').innerText = 'Failed to fetch weather: ' + error;
+    });
+});

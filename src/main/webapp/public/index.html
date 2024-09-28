@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create and Read Users</title>
+    <title>User Management and Weather Information</title>
     <script src="script.js" defer></script> <!-- Link to your script.js -->
 </head>
 <body>
@@ -22,12 +22,24 @@
         <button type="submit">Submit</button>
     </form>
     
-    <!-- Area to display the result -->
+    <!-- Area to display the result of user creation -->
     <div id="result"></div>
 
     <h2>User List</h2>
     <!-- Area to display the user list -->
     <ul id="userList"></ul>
+
+    <h2>Check Weather</h2>
+    <!-- Weather Form -->
+    <form id="weatherForm">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required><br><br>
+        
+        <button type="submit">Get Weather</button>
+    </form>
+
+    <!-- Area to display the weather information -->
+    <div id="weatherResult"></div>
+
 </body>
 </html>
-
